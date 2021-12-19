@@ -10,5 +10,5 @@ public class Chang {
     {
         Chang.msg = msg;
     }
-
+    public static boolean[] sit = {false,false,false,false,false,false,false,false,false,false};
 }
