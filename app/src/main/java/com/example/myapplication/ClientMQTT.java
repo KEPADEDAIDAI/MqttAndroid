@@ -10,7 +10,7 @@ public class ClientMQTT {
 
     public static final String HOST = "tcp://broker.emqx.io:1883";
     public static final String TOPIC1 = "qwerwlw";
-    private static final String clientid = "client11";
+    private static final String clientid = "client12";
     private MqttClient client;
     private MqttConnectOptions options;
     private long time=0;

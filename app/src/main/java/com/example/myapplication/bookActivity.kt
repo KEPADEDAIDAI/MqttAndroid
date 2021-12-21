@@ -3,8 +3,11 @@ package com.example.myapplication
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class bookActivity : AppCompatActivity() {
     val array = arrayListOf<TextView>()
@@ -13,11 +16,31 @@ class bookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
         val button2: Button = findViewById(R.id.button2) //同步按键
+        val button3: Button = findViewById(R.id.button3) //刷新按键
+        val button: Button = findViewById(R.id.button)//座位预约
+        val editTextNumber: EditText = findViewById(R.id.editTextNumber)
         init()
         show()
-        button2.setOnClickListener {
-//            Chang.sit[0] = ! Chang.sit[0]
+        button2.setOnClickListener {//同步
+            sentCenter.si()
+        }
+        button3.setOnClickListener { // 界面刷新
             show()
+        }
+        button.setOnClickListener { //座位预约
+            val text: String = editTextNumber.text.toString()
+            var x: Int = text.toInt()
+            x--;
+            if(x<0||x>9)
+            {
+                Toast.makeText(this,"输入座位不存在",Toast.LENGTH_SHORT).show()
+            }
+            else if(Chang.sit[x])
+                Toast.makeText(this,"该座位已有人",Toast.LENGTH_SHORT).show()
+            else {
+                sentCenter.choseSit(x)
+                Toast.makeText(this,"预约成功",Toast.LENGTH_SHORT).show()
+            }
         }
     }
     private fun init(){

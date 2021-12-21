@@ -26,20 +26,25 @@ class PushCallback : MqttCallback {
         val getStr = String(message.payload)
         if (getStr[0] == 'n') {
             val str: String = getStr.substring(1,getStr.length)
-            Chang.nowNum = str;
+            Chang.nowNum = str.toInt();
         }
         else if(getStr[0]=='s'){
-            if(getStr[4]=='T')
-                Chang.state = "已进入"
-            else Chang.state = "未进入"
+            Chang.state = getStr[4]=='1';
         }
         else if(getStr[0]=='a'){
             val str:String = getStr.substring(4,getStr.length)
-            Chang.allTime = str+"秒"
+            Chang.allTime = str.toLong()
         }
         else if(getStr[0]=='b'){
             val str:String = getStr.substring(4,getStr.length)
-            Chang.thisTime = str+"秒"
+            Chang.laTime = str.toLong()
+        }
+        else if(getStr[0]=='d')
+        {
+            for(i in 1..10)
+            {
+                Chang.sit[i-1] = getStr[i]=='1';
+            }
         }
     }
 }
